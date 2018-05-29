@@ -32,3 +32,9 @@ HEADERS += \
 
 FORMS += \
         mainwindow.ui
+
+
+LIBS += -L$$PWD/OpenSG/lib/ -lOSGWindowQT
+
+INCLUDEPATH += $$PWD/OpenSG/include
+DEPENDPATH += $$PWD/OpenSG/include

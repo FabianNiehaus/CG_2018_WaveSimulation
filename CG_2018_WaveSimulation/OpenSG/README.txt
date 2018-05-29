@@ -1,0 +1,30 @@
+
+  OpenSG Windows Binary Distribution Readme
+  =========================================
+
+This is a binary distribution of OpenSG, Version 1.8.0. It contains some
+tutorial examples for OpenSG and the includes and libs to remake them.
+
+The programs are in tutorials. To try the ones that want to load a file just
+drag it onto them.
+
+To change and recompile the programs we have Visual Studio project files for 
+them. If you want to crearte new programs we stringly recommend starting with
+one of the Tutorial projects, as there are a bunch of project settings that
+need to be set for OpenSG to compile correctly.
+
+This distribution also contains a simple scene viewer based on OpenSG. It's in
+the installation directory and is is called osgSceneViewer.exe. Note that it
+is based on the QT GUI library, version 3.0 (see www.trolltech.com for
+details). Many thanks to Peter Eschler from Fraunhofer IGD for creating that
+version.
+
+If you have questions or comments, please visit www.opensg.org. You can find
+more information about the system and its goals,including documentation and
+ways to get in contact with the developer community.
+
+
+Yours
+
+      The OpenSG Team
+
