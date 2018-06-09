@@ -14,10 +14,38 @@
 #include <fstream>
 #include <sstream>
 
-class OGLWidget
+#include "wavesurface.h"
+
+using namespace std;
+
+class OGLWidget : public QOpenGLWidget,
+                          protected QOpenGLFunctions
 {
+    Q_OBJECT
+
 public:
-    OGLWidget();
+    OGLWidget(QWidget *parent = 0);
+    ~OGLWidget();
+
+public slots:
+    void stepAnimation();
+
+protected:
+    void initializeGL();
+    void resizeGL(int w, int h);
+    void paintGL();
+
+    void SetMaterialColor( int side, float r, float g, float b);
+    void InitLightingAndProjection();
+
+    QTimer* animtimer; // Timer needed to step animation every x msec
+    int animstep;      // Current animation step (used to rotate triangle
+
+private:
+
+    WaveSurface mesh;
+
+    void drawMesh();
 };
 
 #endif // OGLWIDGET_H

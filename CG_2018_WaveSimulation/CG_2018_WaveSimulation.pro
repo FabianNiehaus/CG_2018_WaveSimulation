@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2018-06-05T14:10:26
+# Project created by QtCreator 2018-06-06T11:41:09
 #
 #-------------------------------------------------
 
@@ -30,13 +30,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    oglwidget.cpp \
-    wavesurface.cpp
+    wavesurface.cpp \
+    oglwidget.cpp
 
 HEADERS += \
         mainwindow.h \
-    oglwidget.h \
-    wavesurface.h
+    wavesurface.h \
+    oglwidget.h
 
 FORMS += \
         mainwindow.ui
