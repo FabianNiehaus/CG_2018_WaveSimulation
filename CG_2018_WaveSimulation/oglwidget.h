@@ -39,13 +39,15 @@ protected:
     void InitLightingAndProjection();
 
     QTimer* animtimer; // Timer needed to step animation every x msec
-    int animstep;      // Current animation step (used to rotate triangle
 
 private:
 
-    WaveSurface mesh;
+    WaveSurface waveSurface;
 
-    void drawMesh();
+    void drawMeshWireframe();
+    void drawMeshQuads();
+
+    double timer = 0.0;
 };
 
 #endif // OGLWIDGET_H

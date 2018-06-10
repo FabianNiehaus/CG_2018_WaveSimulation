@@ -31,12 +31,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     wavesurface.cpp \
-    oglwidget.cpp
+    oglwidget.cpp \
+    wave.cpp
 
 HEADERS += \
         mainwindow.h \
     wavesurface.h \
-    oglwidget.h
+    oglwidget.h \
+    wave.h
 
 FORMS += \
         mainwindow.ui

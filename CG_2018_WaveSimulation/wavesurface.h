@@ -4,6 +4,10 @@
 #include <QVector3D>
 #include <vector>
 
+#include <cmath>
+
+#include <wave.h>
+
 using namespace std;
 
 class WaveSurface
@@ -17,11 +21,18 @@ public:
     int getRows();
     int getColumns();
 
+    void addWave(Wave v);
+    void recalculateMesh(double time);
+
 public slots:
 
 
 private:
     vector<vector<QVector3D*>> mesh;
+    vector<Wave> waves;
+
+    double calculateWaveHeight(int x, int z, double time);
+
 
 };
 

@@ -3,12 +3,16 @@
 WaveSurface::WaveSurface()
 {
 
-    for(int i = 0; i < 50; i++){
+    int dimension = 100;
+    double halfDimension = ((double) dimension) / 2;
+    double scaling = 2.0;
+
+    for(int i = 0; i < dimension; i++){
 
         vector<QVector3D *> temp;
 
-        for(int j = 0; j < 50; j++){
-            temp.push_back(new QVector3D(j-25, 1,i-25));
+        for(int j = 0; j < dimension; j++){
+            temp.push_back(new QVector3D(((double)j-halfDimension) / scaling, 1, ((double)i-halfDimension) / scaling));
         }
 
         mesh.push_back(temp);
@@ -39,4 +43,36 @@ int WaveSurface::getRows()
 int WaveSurface::getColumns()
 {
     return (int)mesh.at(0).size();
+}
+
+void WaveSurface::addWave(Wave v)
+{
+    waves.push_back(v);
+}
+
+void WaveSurface::recalculateMesh(double time)
+{
+
+    for(unsigned int i = 0; i < mesh.size(); i++){
+        for(unsigned int j = 0; j < mesh.at(0).size(); j++){
+            QVector3D * vec = mesh.at(i).at(j);
+
+            double y = calculateWaveHeight(vec->x(), vec->z(), time);
+
+            vec->setY(y);
+        }
+    }
+}
+
+double WaveSurface::calculateWaveHeight(int x, int z, double time)
+{
+    double y = 0.0;
+
+    for(unsigned int i = 0; i < waves.size(); i++){
+        Wave wave = waves.at(i);
+
+        y += wave.a * sin(wave.k * QVector2D::dotProduct(wave.D, QVector2D(x,z)) + time * wave.c * wave.k);
+    }
+
+    return y;
 }
