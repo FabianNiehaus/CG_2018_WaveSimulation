@@ -3,10 +3,6 @@
 WaveSurface::WaveSurface()
 {
 
-    int dimension = 100;
-    double halfDimension = ((double) dimension) / 2;
-    double scaling = 2.0;
-
     for(int i = 0; i < dimension; i++){
 
         vector<QVector3D *> temp;
@@ -71,7 +67,16 @@ double WaveSurface::calculateWaveHeight(int x, int z, double time)
     for(unsigned int i = 0; i < waves.size(); i++){
         Wave wave = waves.at(i);
 
-        y += wave.a * sin(wave.k * QVector2D::dotProduct(wave.D, QVector2D(x,z)) + time * wave.c * wave.k);
+        float distance = (wave.O - QVector2D(x,z)).length();
+        double distanceFactor = 0.0;
+
+        if(1.0 / distance < 1){
+            distanceFactor = 1.0 / sqrt(distance);
+        } else {
+            distanceFactor = 1.0;
+        }
+
+        y += (wave.a * sin(wave.k * QVector2D::dotProduct(wave.D, QVector2D(x,z)) + time * wave.c * wave.k)) * distanceFactor;
     }
 
     return y;

@@ -8,12 +8,13 @@
 class Wave
 {
 public:
-    Wave(double a, QVector2D D, double W, double phi);
+    Wave(double a, QVector2D D, double W, double phi, QVector2D O);
 
     double a; // Amplitude
     QVector2D D; // Horizontaler Richtungsvektor
     double l; // Wellenlänge
     double phi; // Phasenverschiebung
+    QVector2D O; // Ursprungspunkt
 
     double c; // Phasengeschwindigkeit
     double f; // Frequenz

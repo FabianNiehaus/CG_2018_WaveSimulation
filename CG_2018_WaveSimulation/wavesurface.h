@@ -33,6 +33,9 @@ private:
 
     double calculateWaveHeight(int x, int z, double time);
 
+    int dimension = 50;
+    double halfDimension = ((double) dimension) / 2;
+    double scaling = 1;
 
 };
 

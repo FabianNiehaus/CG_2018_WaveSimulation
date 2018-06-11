@@ -162,8 +162,9 @@ void OGLWidget::initializeGL() // initializations to be called once
     initializeOpenGLFunctions();
     InitLightingAndProjection();
 
-    waveSurface.addWave(Wave (1.0, QVector2D(1.0,1.0), 7.5, 0.0));
-    waveSurface.addWave(Wave (1.0, QVector2D(1.0,0.0), 7.5, 0.0));
+    // Amplitude, Richtungsvektor, Wellenlänge, Phasenverschiebung, Ursprungspunkt
+    waveSurface.addWave(Wave (1.0, QVector2D(1.0,1.0), 7.5, 0.0, QVector2D(0.0, -10.0)));
+    //waveSurface.addWave(Wave (1.0, QVector2D(1.0,0.0), 7.5, 0.0, QVector2D(0.0,-50.0)));
     //waveSurface.addWave(Wave (1.0, QVector2D(1.0,0.0), 5, 0.0));
     //waveSurface.addWave(Wave (1.0, QVector2D(0.0,1.0), 5, 0.0));
 
