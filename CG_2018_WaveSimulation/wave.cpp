@@ -4,7 +4,7 @@ Wave::Wave(double a, double l, double phi, QVector2D O)
 {
     this->a = a;
     this->l = l;
-    this->phi = phi;
+    this->timeOffset = phi;
     this->O = O;
 
     this->c = sqrt( (g*l) / (2*pi) );
