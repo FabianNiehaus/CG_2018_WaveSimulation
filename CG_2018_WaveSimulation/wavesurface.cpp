@@ -62,6 +62,9 @@ void WaveSurface::recalculateMesh(double time)
     }
 }
 
+/*
+ * http://www.wolframalpha.com/input/?i=e%5E(i*a)*e%5E(i*b)
+ */
 double WaveSurface::calculateWaveHeight(double x, double z, double time)
 {
     double y = 0.0;
@@ -72,7 +75,7 @@ double WaveSurface::calculateWaveHeight(double x, double z, double time)
         Wave wave = waves.at(i);
 
         double distanceToOrigin = QVector2D(x,z).distanceToPoint(wave.O);
-        double phi = -2 * wave.pi * wave.f * (time + wave.phi);
+        double phi = -2 * wave.pi * wave.f * (time + wave.timeOffset);
 
         if(distanceToOrigin < 0.5){ cout << distanceToOrigin << endl;}
 
