@@ -8,10 +8,9 @@
 class Wave
 {
 public:
-    Wave(double a, QVector2D D, double W, double phi, QVector2D O);
+    Wave(double a, double W, double phi, QVector2D O);
 
     double a; // Amplitude
-    QVector2D D; // Horizontaler Richtungsvektor
     double l; // Wellenlänge
     double phi; // Phasenverschiebung
     QVector2D O; // Ursprungspunkt
@@ -20,7 +19,6 @@ public:
     double f; // Frequenz
     double k; // Wellenzahl
 
-private:
     const double g = 9.81;
     const double pi = 3.141592653589793;
 

@@ -5,6 +5,7 @@
 #include <vector>
 
 #include <cmath>
+#include <iostream>
 
 #include <wave.h>
 
@@ -13,7 +14,7 @@ using namespace std;
 class WaveSurface
 {
 public:
-    WaveSurface();
+    WaveSurface(double meshDim_X, double meshDim_Z, double scaling);
 
     QVector3D* getAt(int row, int column);
     void setAt(int row, int column, QVector3D* vec);
@@ -31,11 +32,10 @@ private:
     vector<vector<QVector3D*>> mesh;
     vector<Wave> waves;
 
-    double calculateWaveHeight(int x, int z, double time);
+    double calculateWaveHeight(double x, double z, double time);
 
-    int dimension = 50;
-    double halfDimension = ((double) dimension) / 2;
-    double scaling = 1;
+    double scaledOffset_X;
+    double scaledOffset_Z;
 
 };
 

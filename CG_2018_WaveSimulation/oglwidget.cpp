@@ -19,7 +19,7 @@ OGLWidget::~OGLWidget() // destructor
 
 void OGLWidget::stepAnimation()
 {
-    waveSurface.recalculateMesh(timer);
+    waveSurface->recalculateMesh(timer);
     timer += 0.05;
     update();      // Trigger redraw of scene with paintGL
 }
@@ -86,10 +86,10 @@ void OGLWidget::InitLightingAndProjection() // to be executed once before drawin
 
 void OGLWidget::drawMeshWireframe()
 {
-    for(int row = 0; row < waveSurface.getRows(); row++){
-        for(int column = 0; column < waveSurface.getColumns(); column++){
+    for(int row = 0; row < waveSurface->getRows(); row++){
+        for(int column = 0; column < waveSurface->getColumns(); column++){
 
-            QVector3D * vec = waveSurface.getAt(row, column);
+            QVector3D * vec = waveSurface->getAt(row, column);
 
             float x = vec->x();
             float y = vec->y();
@@ -97,9 +97,9 @@ void OGLWidget::drawMeshWireframe()
 
             //std::cout << x << "|" << y << "|" << z << std::endl;
 
-            if(row < waveSurface.getRows() - 1){
+            if(row < waveSurface->getRows() - 1){
                 // Nachbar in nächster Zeile
-                QVector3D * vec_nextR = waveSurface.getAt(row + 1, column);
+                QVector3D * vec_nextR = waveSurface->getAt(row + 1, column);
 
                 glBegin(GL_LINES);
                     glVertex3d(x,y,z);
@@ -108,9 +108,9 @@ void OGLWidget::drawMeshWireframe()
 
             }
 
-            if(column < waveSurface.getColumns() -1){
+            if(column < waveSurface->getColumns() -1){
                 // Nachbar in nächster Spalte
-                QVector3D * vec_nextC = waveSurface.getAt(row, column + 1);
+                QVector3D * vec_nextC = waveSurface->getAt(row, column + 1);
 
                 glBegin(GL_LINES);
                     glVertex3d(x,y,z);
@@ -118,9 +118,9 @@ void OGLWidget::drawMeshWireframe()
                 glEnd();
             }
 
-            if(row < waveSurface.getRows() - 1 && column < waveSurface.getColumns() -1){
+            if(row < waveSurface->getRows() - 1 && column < waveSurface->getColumns() -1){
                 // Nachbar diagonal in nächster Zeile und Spalte
-                QVector3D * vec_nextRaC = waveSurface.getAt(row + 1, column + 1);
+                QVector3D * vec_nextRaC = waveSurface->getAt(row + 1, column + 1);
 
                 glBegin(GL_LINES);
                     glVertex3d(x,y,z);
@@ -133,13 +133,13 @@ void OGLWidget::drawMeshWireframe()
 
 void OGLWidget::drawMeshQuads()
 {
-    for(int row = 0; row < waveSurface.getRows() - 1; row++){
-        for(int column = 0; column < waveSurface.getColumns() - 1; column++){
+    for(int row = 0; row < waveSurface->getRows() - 1; row++){
+        for(int column = 0; column < waveSurface->getColumns() - 1; column++){
 
-            QVector3D * vec1 = waveSurface.getAt(row, column);
-            QVector3D * vec2 = waveSurface.getAt(row, column + 1);
-            QVector3D * vec3 = waveSurface.getAt(row + 1, column + 1);
-            QVector3D * vec4 = waveSurface.getAt(row + 1, column);
+            QVector3D * vec1 = waveSurface->getAt(row, column);
+            QVector3D * vec2 = waveSurface->getAt(row, column + 1);
+            QVector3D * vec3 = waveSurface->getAt(row + 1, column + 1);
+            QVector3D * vec4 = waveSurface->getAt(row + 1, column);
 
             glBegin(GL_QUADS);
 
@@ -162,11 +162,17 @@ void OGLWidget::initializeGL() // initializations to be called once
     initializeOpenGLFunctions();
     InitLightingAndProjection();
 
-    // Amplitude, Richtungsvektor, Wellenlänge, Phasenverschiebung, Ursprungspunkt
-    waveSurface.addWave(Wave (1.0, QVector2D(1.0,1.0), 7.5, 0.0, QVector2D(0.0, -10.0)));
-    //waveSurface.addWave(Wave (1.0, QVector2D(1.0,0.0), 7.5, 0.0, QVector2D(0.0,-50.0)));
-    //waveSurface.addWave(Wave (1.0, QVector2D(1.0,0.0), 5, 0.0));
-    //waveSurface.addWave(Wave (1.0, QVector2D(0.0,1.0), 5, 0.0));
+    int meshDim_X = 50;
+    int meshDim_Z = 50;
+    int scaling = 1.0;
+
+    waveSurface = new WaveSurface(meshDim_X, meshDim_Z, scaling);
+
+    // Amplitude, Wellenlänge, Phasenverschiebung, Ursprungspunkt
+    waveSurface->addWave(Wave (1.0, 7.5, 0.0, QVector2D(15.0, 15.0)));
+    waveSurface->addWave(Wave (1.0, 7.5, 0.0, QVector2D(-15.0,-15.0)));
+    waveSurface->addWave(Wave (2.0, 5, 1.0, QVector2D(0.0,0.0)));
+
 
 }
 
@@ -186,7 +192,7 @@ void OGLWidget::paintGL() // draw everything, to be called repeatedly
     SetMaterialColor( 2, 0.2, 0.2, 1.0);
     //glScaled(0.1,0.1,0.1);
     glRotated(45.0, 1, -1, 0);
-    //glTranslated(0.0, 0.0, -25.0);
+
     drawMeshQuads();
 
     // make it appear (before this, it's hidden in the rear buffer)

@@ -42,7 +42,7 @@ protected:
 
 private:
 
-    WaveSurface waveSurface;
+    WaveSurface * waveSurface;
 
     void drawMeshWireframe();
     void drawMeshQuads();

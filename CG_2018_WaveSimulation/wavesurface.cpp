@@ -1,14 +1,16 @@
 #include "wavesurface.h"
 
-WaveSurface::WaveSurface()
+WaveSurface::WaveSurface(double meshDim_X, double meshDim_Z, double scaling)
 {
+    scaledOffset_X = meshDim_X / 2;
+    scaledOffset_Z = meshDim_Z / 2;
 
-    for(int i = 0; i < dimension; i++){
+    for(int i = 0; i < meshDim_X; i++){
 
         vector<QVector3D *> temp;
 
-        for(int j = 0; j < dimension; j++){
-            temp.push_back(new QVector3D(((double)j-halfDimension) / scaling, 1, ((double)i-halfDimension) / scaling));
+        for(int j = 0; j < meshDim_Z; j++){
+            temp.push_back(new QVector3D(((double)j - scaledOffset_X)/ scaling, 1, ((double)i - scaledOffset_Z)/ scaling));
         }
 
         mesh.push_back(temp);
@@ -60,23 +62,21 @@ void WaveSurface::recalculateMesh(double time)
     }
 }
 
-double WaveSurface::calculateWaveHeight(int x, int z, double time)
+double WaveSurface::calculateWaveHeight(double x, double z, double time)
 {
     double y = 0.0;
+
+    double yScaling = 3.0;
 
     for(unsigned int i = 0; i < waves.size(); i++){
         Wave wave = waves.at(i);
 
-        float distance = (wave.O - QVector2D(x,z)).length();
-        double distanceFactor = 0.0;
+        double distanceToOrigin = QVector2D(x,z).distanceToPoint(wave.O);
+        double phi = -2 * wave.pi * wave.f * (time + wave.phi);
 
-        if(1.0 / distance < 1){
-            distanceFactor = 1.0 / sqrt(distance);
-        } else {
-            distanceFactor = 1.0;
-        }
+        if(distanceToOrigin < 0.5){ cout << distanceToOrigin << endl;}
 
-        y += (wave.a * sin(wave.k * QVector2D::dotProduct(wave.D, QVector2D(x,z)) + time * wave.c * wave.k)) * distanceFactor;
+        y += wave.a * cos(wave.k * distanceToOrigin + phi) / (distanceToOrigin + 1) * yScaling;
     }
 
     return y;
