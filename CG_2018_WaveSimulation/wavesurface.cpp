@@ -77,7 +77,7 @@ double WaveSurface::calculateWaveHeight(double x, double z, double time)
         double distanceToOrigin = QVector2D(x,z).distanceToPoint(wave.O);
         double phi = -2 * wave.pi * wave.f * (time + wave.timeOffset);
 
-        if(distanceToOrigin < 0.5){ cout << distanceToOrigin << endl;}
+        //if(distanceToOrigin < 0.5){ cout << distanceToOrigin << endl;}
 
         y += wave.a * cos(wave.k * distanceToOrigin + phi) / (distanceToOrigin + 1) * yScaling;
     }
