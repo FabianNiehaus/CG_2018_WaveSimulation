@@ -1,0 +1,17 @@
+\BOOKMARK [1][-]{section.1}{Abstract}{}% 1
+\BOOKMARK [1][-]{section.2}{The function will be used}{}% 2
+\BOOKMARK [1][-]{section.3}{Realisation}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Creating an interface with QT}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Creating the data structure}{section.3}% 5
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Quad mesh}{subsection.3.2}% 6
+\BOOKMARK [2][-]{subsection.3.3}{Rendering as a wireframe}{section.3}% 7
+\BOOKMARK [3][-]{subsubsection.3.3.1}{Rendering as a solid}{subsection.3.3}% 8
+\BOOKMARK [2][-]{subsection.3.4}{Calculation the vertex valence}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.5}{Determining adjacent quads}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.6}{Printing the data}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.7}{Catmull-Clark-Subdivision}{section.3}% 12
+\BOOKMARK [3][-]{subsubsection.3.7.1}{Calculating the Face-Mask}{subsection.3.7}% 13
+\BOOKMARK [3][-]{subsubsection.3.7.2}{Calculating the Edge-Masks}{subsection.3.7}% 14
+\BOOKMARK [3][-]{subsubsection.3.7.3}{Calculating the Vertex-Masks}{subsection.3.7}% 15
+\BOOKMARK [3][-]{subsubsection.3.7.4}{Reconnecting the mesh}{subsection.3.7}% 16
+\BOOKMARK [2][-]{subsection.3.8}{Bezier surface calculation}{section.3}% 17
