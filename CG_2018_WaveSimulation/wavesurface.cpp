@@ -1,16 +1,26 @@
+/*
+ * CG_2018_WaveSimulation
+ *
+ * Fabian Niehaus
+ * Tuyet Nguyen
+ *
+ * Letzte Bearbeitung: 24.06.2018
+ *
+ */
+
 #include "wavesurface.h"
 
 WaveSurface::WaveSurface(double meshDim_X, double meshDim_Z, double scaling)
 {
-    scaledOffset_X = meshDim_X / 2;
-    scaledOffset_Z = meshDim_Z / 2;
+    offset_X = meshDim_X / 2;
+    offset_Z = meshDim_Z / 2;
 
     for(int i = 0; i < meshDim_X; i++){
 
         vector<QVector3D *> temp;
 
         for(int j = 0; j < meshDim_Z; j++){
-            temp.push_back(new QVector3D(((double)j - scaledOffset_X)/ scaling, 1, ((double)i - scaledOffset_Z)/ scaling));
+            temp.push_back(new QVector3D(((double)j - offset_X)/ scaling, 1, ((double)i - offset_Z)/ scaling));
         }
 
         mesh.push_back(temp);
@@ -48,6 +58,16 @@ void WaveSurface::addWave(Wave v)
     waves.push_back(v);
 }
 
+Wave *WaveSurface::getWave(int index)
+{
+    return &waves.at(index);
+}
+
+void WaveSurface::clearWaves()
+{
+    waves.clear();
+}
+
 void WaveSurface::recalculateMesh(double time)
 {
 
@@ -69,17 +89,13 @@ double WaveSurface::calculateWaveHeight(double x, double z, double time)
 {
     double y = 0.0;
 
-    double yScaling = 3.0;
-
     for(unsigned int i = 0; i < waves.size(); i++){
         Wave wave = waves.at(i);
 
         double distanceToOrigin = QVector2D(x,z).distanceToPoint(wave.O);
         double phi = -2 * wave.pi * wave.f * (time + wave.timeOffset);
 
-        //if(distanceToOrigin < 0.5){ cout << distanceToOrigin << endl;}
-
-        y += wave.a * cos(wave.k * distanceToOrigin + phi) / (distanceToOrigin + 1) * yScaling;
+        y += wave.a * cos(wave.k * distanceToOrigin + phi) / (distanceToOrigin + 1);
     }
 
     return y;

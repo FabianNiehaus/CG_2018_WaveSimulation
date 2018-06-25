@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>620</width>
+    <width>925</width>
     <height>620</height>
    </rect>
   </property>
@@ -24,13 +24,243 @@
      </rect>
     </property>
    </widget>
+   <widget class="QWidget" name="controlWidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>10</y>
+      <width>291</width>
+      <height>551</height>
+     </rect>
+    </property>
+    <widget class="QWidget" name="originXWidget" native="true">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>-1</y>
+       <width>261</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <widget class="QLabel" name="originXLabel">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>261</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Urprung X</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QWidget" name="originXSliderWidget" native="true">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>20</y>
+        <width>261</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <widget class="QSlider" name="originXSlider">
+       <property name="geometry">
+        <rect>
+         <x>5</x>
+         <y>0</y>
+         <width>251</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="minimum">
+        <number>-25</number>
+       </property>
+       <property name="maximum">
+        <number>25</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="tickPosition">
+        <enum>QSlider::TicksBelow</enum>
+       </property>
+       <property name="tickInterval">
+        <number>5</number>
+       </property>
+      </widget>
+      <widget class="QLabel" name="originXMinLabel">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>20</y>
+         <width>20</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>-25</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="originXMaxLabel">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>20</y>
+         <width>20</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>25</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="originXMidLabel">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>20</y>
+         <width>20</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>0</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </widget>
+     <zorder>originXSliderWidget</zorder>
+     <zorder>originXLabel</zorder>
+    </widget>
+    <widget class="QWidget" name="originYWidget" native="true">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>70</y>
+       <width>261</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <widget class="QLabel" name="originYLabel">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>261</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Urprung Y</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QWidget" name="originYSliderWidget" native="true">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>20</y>
+        <width>261</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <widget class="QSlider" name="originYSlider">
+       <property name="geometry">
+        <rect>
+         <x>5</x>
+         <y>0</y>
+         <width>251</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="minimum">
+        <number>-25</number>
+       </property>
+       <property name="maximum">
+        <number>25</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="tickPosition">
+        <enum>QSlider::TicksBelow</enum>
+       </property>
+       <property name="tickInterval">
+        <number>5</number>
+       </property>
+      </widget>
+      <widget class="QLabel" name="originYMinLabel">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>20</y>
+         <width>20</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>-25</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="originYMaxLabel">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>20</y>
+         <width>20</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>25</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="originYMidLabel">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>20</y>
+         <width>20</width>
+         <height>15</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>0</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>620</width>
+     <width>925</width>
      <height>21</height>
     </rect>
    </property>

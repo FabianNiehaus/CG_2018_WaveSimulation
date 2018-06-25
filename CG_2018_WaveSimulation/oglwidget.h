@@ -1,3 +1,13 @@
+/*
+ * CG_2018_WaveSimulation
+ *
+ * Fabian Niehaus
+ * Tuyet Nguyen
+ *
+ * Letzte Bearbeitung: 24.06.2018
+ *
+ */
+
 #ifndef OGLWIDGET_H
 #define OGLWIDGET_H
 
@@ -30,6 +40,9 @@ public:
 public slots:
     void stepAnimation();
 
+    void updateWaveX(int sourceX);
+    void updateWaveZ(int sourceZ);
+
 protected:
     void initializeGL();
     void resizeGL(int w, int h);
@@ -48,6 +61,12 @@ private:
     void drawMeshQuads();
 
     double timer = 0.0;
+
+    int meshDim_X = 50; // -25 bis +25
+    int meshDim_Z = 50; // -25 bis +25
+    int scaling = 1.0;
+
+    void updateWaves(double sourceX, double sourceZ);
 };
 
 #endif // OGLWIDGET_H

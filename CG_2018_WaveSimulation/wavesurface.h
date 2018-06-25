@@ -1,3 +1,13 @@
+/*
+ * CG_2018_WaveSimulation
+ *
+ * Fabian Niehaus
+ * Tuyet Nguyen
+ *
+ * Letzte Bearbeitung: 24.06.2018
+ *
+ */
+
 #ifndef WAVESURFACE_H
 #define WAVESURFACE_H
 
@@ -23,6 +33,9 @@ public:
     int getColumns();
 
     void addWave(Wave v);
+    Wave * getWave(int index);
+    void clearWaves();
+
     void recalculateMesh(double time);
 
 public slots:
@@ -34,8 +47,8 @@ private:
 
     double calculateWaveHeight(double x, double z, double time);
 
-    double scaledOffset_X;
-    double scaledOffset_Z;
+    double offset_X;
+    double offset_Z;
 
 };
 

@@ -1,3 +1,13 @@
+/*
+ * CG_2018_WaveSimulation
+ *
+ * Fabian Niehaus
+ * Tuyet Nguyen
+ *
+ * Letzte Bearbeitung: 24.06.2018
+ *
+ */
+
 #include "wave.h"
 
 Wave::Wave(double a, double l, double phi, QVector2D O)
