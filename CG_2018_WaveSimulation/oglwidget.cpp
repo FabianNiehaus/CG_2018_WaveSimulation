@@ -90,47 +90,45 @@ void OGLWidget::updateReflection(int reflect)
 
 void OGLWidget::updateWaves(double amplitude, double wavelength, double sourceX, double sourceZ)
 {
-    waveSurface = new WaveSurface(meshDim_X, meshDim_Z, scaling);
-
     waveSurface->clearWaves();
 
     // Amplitude, Wellenlänge, Phasenverschiebung, Ursprungspunkt
     waveSurface->addWave(Wave (amplitude, wavelength, 0.0, QVector2D(sourceX, sourceZ)));
 
     if(reflect > 0){
-    /*
-     * Reflektion über Image Source Methode
-     */
+        /*
+         * Reflektion über Image Source Methode
+         */
 
-    // Benachbarte Ursprungspunkte berechnen
-    QVector2D n1 = QVector2D(-1 * meshDim_X - sourceX, meshDim_Z - sourceZ); // links oben
-    QVector2D n2 = QVector2D(sourceX, meshDim_Z - sourceZ); // oben
-    QVector2D n3 = QVector2D(meshDim_X - sourceX, meshDim_Z - sourceZ); // rechts oben
-    QVector2D n4 = QVector2D(-1 * meshDim_X - sourceX, sourceZ); // links
-    QVector2D n5 = QVector2D(meshDim_X - sourceX, sourceZ); // rechts
-    QVector2D n6 = QVector2D(-1 * meshDim_X - sourceX, -1 * meshDim_Z - sourceZ); // links unten
-    QVector2D n7 = QVector2D(sourceX, -1 * meshDim_Z - sourceZ); // unten
-    QVector2D n8 = QVector2D(meshDim_X - sourceX, -1 * meshDim_Z - sourceZ); // rechts unten
+        // Benachbarte Ursprungspunkte berechnen
+        QVector2D n1 = QVector2D(-1 * meshDim_X - sourceX, meshDim_Z - sourceZ); // links oben
+        QVector2D n2 = QVector2D(sourceX, meshDim_Z - sourceZ); // oben
+        QVector2D n3 = QVector2D(meshDim_X - sourceX, meshDim_Z - sourceZ); // rechts oben
+        QVector2D n4 = QVector2D(-1 * meshDim_X - sourceX, sourceZ); // links
+        QVector2D n5 = QVector2D(meshDim_X - sourceX, sourceZ); // rechts
+        QVector2D n6 = QVector2D(-1 * meshDim_X - sourceX, -1 * meshDim_Z - sourceZ); // links unten
+        QVector2D n7 = QVector2D(sourceX, -1 * meshDim_Z - sourceZ); // unten
+        QVector2D n8 = QVector2D(meshDim_X - sourceX, -1 * meshDim_Z - sourceZ); // rechts unten
 
-    // Urpsungspunkt ausgeben für Debugging
-    cout << "N1: " << n1.x() << " | " << n1.y() << endl;
-    cout << "N2: " << n2.x() << " | " << n2.y() << endl;
-    cout << "N3: " << n3.x() << " | " << n3.y() << endl;
-    cout << "N4: " << n4.x() << " | " << n4.y() << endl;
-    cout << "N5: " << n5.x() << " | " << n5.y() << endl;
-    cout << "N6: " << n6.x() << " | " << n6.y() << endl;
-    cout << "N7: " << n7.x() << " | " << n7.y() << endl;
-    cout << "N8: " << n8.x() << " | " << n8.y() << endl;
+        // Urpsungspunkt ausgeben für Debugging
+        cout << "N1: " << n1.x() << " | " << n1.y() << endl;
+        cout << "N2: " << n2.x() << " | " << n2.y() << endl;
+        cout << "N3: " << n3.x() << " | " << n3.y() << endl;
+        cout << "N4: " << n4.x() << " | " << n4.y() << endl;
+        cout << "N5: " << n5.x() << " | " << n5.y() << endl;
+        cout << "N6: " << n6.x() << " | " << n6.y() << endl;
+        cout << "N7: " << n7.x() << " | " << n7.y() << endl;
+        cout << "N8: " << n8.x() << " | " << n8.y() << endl;
 
-    // Wellen mit entsprechenden Ursprungspunkten einfügen
-    waveSurface->addWave(Wave (amplitude, wavelength, 0.0, n1));
-    waveSurface->addWave(Wave (amplitude, wavelength, 0.0, n2));
-    waveSurface->addWave(Wave (amplitude, wavelength, 0.0, n3));
-    waveSurface->addWave(Wave (amplitude, wavelength, 0.0, n4));
-    waveSurface->addWave(Wave (amplitude, wavelength, 0.0, n5));
-    waveSurface->addWave(Wave (amplitude, wavelength, 0.0, n6));
-    waveSurface->addWave(Wave (amplitude, wavelength, 0.0, n7));
-    waveSurface->addWave(Wave (amplitude, wavelength, 0.0, n8));
+        // Wellen mit entsprechenden Ursprungspunkten einfügen
+        waveSurface->addWave(Wave (amplitude, wavelength, 0.0, n1));
+        waveSurface->addWave(Wave (amplitude, wavelength, 0.0, n2));
+        waveSurface->addWave(Wave (amplitude, wavelength, 0.0, n3));
+        waveSurface->addWave(Wave (amplitude, wavelength, 0.0, n4));
+        waveSurface->addWave(Wave (amplitude, wavelength, 0.0, n5));
+        waveSurface->addWave(Wave (amplitude, wavelength, 0.0, n6));
+        waveSurface->addWave(Wave (amplitude, wavelength, 0.0, n7));
+        waveSurface->addWave(Wave (amplitude, wavelength, 0.0, n8));
     }
 }
 
@@ -271,6 +269,8 @@ void OGLWidget::initializeGL() // initializations to be called once
 {
     initializeOpenGLFunctions();
     InitLightingAndProjection();
+
+    waveSurface = new WaveSurface(meshDim_X, meshDim_Z, scaling);
 
     // Amplitude, Wavelength, SourceX, SourceZ
     updateWaves(3.0, 7.5, 0.0, 0.0);

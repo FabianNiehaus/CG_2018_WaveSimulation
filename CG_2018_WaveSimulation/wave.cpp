@@ -17,7 +17,12 @@ Wave::Wave(double a, double l, double phi, QVector2D O)
     this->timeOffset = phi;
     this->O = O;
 
+    // Phasengeschwindigkeit = Wurzel aus ( Erdbeschleunigung * Wellenlänge / 2*pi )
     this->c = sqrt( (g*l) / (2*pi) );
+
+    // Frequenz = Phasengeschwindigkeit / Wellenlänge
     this->f = c / l;
+
+    // Wellenzahl = 2*pi / Wellenlännge
     this->k = (2*pi) / l;
 }

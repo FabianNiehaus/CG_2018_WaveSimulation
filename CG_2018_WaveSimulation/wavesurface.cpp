@@ -82,9 +82,7 @@ void WaveSurface::recalculateMesh(double time)
     }
 }
 
-/*
- * http://www.wolframalpha.com/input/?i=e%5E(i*a)*e%5E(i*b)
- */
+
 double WaveSurface::calculateWaveHeight(double x, double z, double time)
 {
     double y = 0.0;
@@ -92,9 +90,13 @@ double WaveSurface::calculateWaveHeight(double x, double z, double time)
     for(unsigned int i = 0; i < waves.size(); i++){
         Wave wave = waves.at(i);
 
+        // Abstand vom Wellenursprungspunkt
         double distanceToOrigin = QVector2D(x,z).distanceToPoint(wave.O);
+
+        // Phasenverschiebung
         double phi = -2 * wave.pi * wave.f * (time + wave.timeOffset);
 
+        // Wellenlänge * cos( Wellenzahl * Abstand vom Ursprung + Phasenverschiebung ) / ( Abstand vom Ursprung + 1 )
         y += wave.a * cos(wave.k * distanceToOrigin + phi) / (distanceToOrigin + 1);
     }
 
