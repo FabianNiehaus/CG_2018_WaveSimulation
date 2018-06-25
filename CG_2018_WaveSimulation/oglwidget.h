@@ -42,6 +42,9 @@ public slots:
 
     void updateWaveX(int sourceX);
     void updateWaveZ(int sourceZ);
+    void updateWaveA(int amplitude);
+    void updateWaveL(int wavelength);
+    void updateReflection(int reflect);
 
 protected:
     void initializeGL();
@@ -66,7 +69,9 @@ private:
     int meshDim_Z = 50; // -25 bis +25
     int scaling = 1.0;
 
-    void updateWaves(double sourceX, double sourceZ);
+    bool reflect = false;
+
+    void updateWaves(double amplitude, double wavelength, double sourceX, double sourceZ);
 };
 
 #endif // OGLWIDGET_H

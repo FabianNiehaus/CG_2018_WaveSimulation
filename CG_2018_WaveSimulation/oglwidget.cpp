@@ -36,30 +36,68 @@ void OGLWidget::stepAnimation()
 
 void OGLWidget::updateWaveX(int sourceX)
 {
-    double sourceZ = waveSurface->getWave(0)->O.y();
+    const Wave * w = waveSurface->getWave(0);
+    double sourceZ = w->O.y();
+    double amplitude = w->a;
+    double wavelength = w->l;
 
-    updateWaves((double) sourceX, sourceZ);
+    updateWaves(amplitude, wavelength, (double) sourceX, sourceZ);
 }
 
 void OGLWidget::updateWaveZ(int sourceZ)
 {
-    double sourceX = waveSurface->getWave(0)->O.x();
+    const Wave * w = waveSurface->getWave(0);
+    double sourceX = w->O.x();
+    double amplitude = w->a;
+    double wavelength = w->l;
 
-    updateWaves(sourceX, (double) sourceZ);
+    updateWaves(amplitude, wavelength, sourceX, (double) sourceZ);
 }
 
-void OGLWidget::updateWaves(double sourceX, double sourceZ)
+void OGLWidget::updateWaveA(int amplitude)
+{
+    const Wave * w = waveSurface->getWave(0);
+    double sourceX = w->O.x();
+    double sourceZ = w->O.y();
+    double wavelength = w->l;
+
+    updateWaves((double) amplitude, wavelength, sourceX, sourceZ);
+}
+
+void OGLWidget::updateWaveL(int wavelength)
+{
+    const Wave * w = waveSurface->getWave(0);
+    double sourceX = w->O.x();
+    double sourceZ = w->O.y();
+    double amplitude = w->a;
+
+    updateWaves(amplitude, (double) wavelength, sourceX, sourceZ);
+}
+
+void OGLWidget::updateReflection(int reflect)
+{
+    this->reflect = reflect;
+
+    const Wave * w = waveSurface->getWave(0);
+    double sourceX = w->O.x();
+    double sourceZ = w->O.y();
+    double amplitude = w->a;
+    double wavelength = w->l;
+
+    updateWaves(amplitude, wavelength, sourceX, sourceZ);
+}
+
+
+void OGLWidget::updateWaves(double amplitude, double wavelength, double sourceX, double sourceZ)
 {
     waveSurface = new WaveSurface(meshDim_X, meshDim_Z, scaling);
-
-    double amplitude = 3.0;
-    double wavelength = 7.5;
 
     waveSurface->clearWaves();
 
     // Amplitude, Wellenlänge, Phasenverschiebung, Ursprungspunkt
     waveSurface->addWave(Wave (amplitude, wavelength, 0.0, QVector2D(sourceX, sourceZ)));
 
+    if(reflect > 0){
     /*
      * Reflektion über Image Source Methode
      */
@@ -93,6 +131,7 @@ void OGLWidget::updateWaves(double sourceX, double sourceZ)
     waveSurface->addWave(Wave (amplitude, wavelength, 0.0, n6));
     waveSurface->addWave(Wave (amplitude, wavelength, 0.0, n7));
     waveSurface->addWave(Wave (amplitude, wavelength, 0.0, n8));
+    }
 }
 
 // define material color properties for front and back side
@@ -233,7 +272,8 @@ void OGLWidget::initializeGL() // initializations to be called once
     initializeOpenGLFunctions();
     InitLightingAndProjection();
 
-    updateWaves(0.0, 0.0);
+    // Amplitude, Wavelength, SourceX, SourceZ
+    updateWaves(3.0, 7.5, 0.0, 0.0);
 }
 
 void OGLWidget::paintGL() // draw everything, to be called repeatedly

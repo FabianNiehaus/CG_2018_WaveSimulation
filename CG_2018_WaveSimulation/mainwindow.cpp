@@ -19,6 +19,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QSlider * originXSlider = this->centralWidget()->findChild<QSlider *>("originXSlider");
     QSlider * originYSlider = this->centralWidget()->findChild<QSlider *>("originYSlider");
+    QSlider * amplitudeSlider = this->centralWidget()->findChild<QSlider *>("amplitudeSlider");
+    QSlider * wavelengthSlider = this->centralWidget()->findChild<QSlider *>("wavelengthSlider");
+
+    QCheckBox * reflectionCheckBox = this->centralWidget()->findChild<QCheckBox *>("reflectionCheckBox");
 
     OGLWidget * openGLWidget = this->centralWidget()->findChild<OGLWidget *>("openGLWidget");
 
@@ -29,12 +33,20 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //std::cout << openGLWidget->objectName().toLocal8Bit().constData() << std::endl;
 
-
     connect(originXSlider, SIGNAL(valueChanged(int)),
                 openGLWidget, SLOT(updateWaveX(int)));
 
     connect(originYSlider, SIGNAL(valueChanged(int)),
                 openGLWidget, SLOT(updateWaveZ(int)));
+
+    connect(amplitudeSlider, SIGNAL(valueChanged(int)),
+                openGLWidget, SLOT(updateWaveA(int)));
+
+    connect(wavelengthSlider, SIGNAL(valueChanged(int)),
+                openGLWidget, SLOT(updateWaveL(int)));
+
+    connect(reflectionCheckBox, SIGNAL(stateChanged(int)),
+                openGLWidget, SLOT(updateReflection(int)));
 
 }
 

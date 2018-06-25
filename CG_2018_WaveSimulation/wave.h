@@ -18,7 +18,7 @@
 class Wave
 {
 public:
-    Wave(double a, double W, double timeOffset, QVector2D O);
+    Wave(double a, double l, double timeOffset, QVector2D O);
 
     double a; // Amplitude
     double l; // Wellenlänge
