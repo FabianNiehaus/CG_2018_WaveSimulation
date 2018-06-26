@@ -8,6 +8,11 @@
 \usepackage{color}
 \usepackage{amsmath}
 \usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\pagestyle{empty}
+\usepackage{collectbox}
 
 % Für Verwendugn von Utnerstrichen ohne Escaping
 \usepackage{underscore}
@@ -70,6 +75,13 @@
 	morestring=[b]"
 }
 
+\newcommand{\mybox}{%
+    \collectbox{%
+        \setlength{\fboxsep}{1pt}%
+        \fbox{\BOXCONTENT}%
+    }%
+}
+\makeatother
 \title{Simulating and rendering waves on water surfaces}
 \author{Fabian Niehaus, Tuyet Nguyen}
 \date{Juni 22, 2018}
@@ -116,7 +128,23 @@
 
 \section{Abstract}
 In this project we will build a C++ application to sumulating and rendering waves on water surfaces. It will also be able to…. We will use QT Creator for programming, QT for window management and OpenGL for 3D rendering.
-\section{The function will be used}
+\section{The function}
+An obvious way to represent waves is through sine or cosine functions. If one chooses the parameters wavelength, amplitude and wave direction with a certain variance around specified basic values and superimposes a number of these waves, this results in at least one water-like wave train. The following formula results for a sum of sine waves, which are visualized by the Heigth Field H. The water is at rest in the x / z plane of a coordinate system.\\
+
+y += wave.a * cos(wave.k * distanceToOrigin + phi) / (distanceToOrigin + 1);\\
+
+this results in an altitude value in the height field for each position (x, z), with the amplitude a, the direction vector D and a phase shift φ. D stands parallel to the stationary water surface and perpendicular to the associated wave train and the phase velocity c, the frequency f and the so-called wave number k are defined by \\
+
+c =g·l 2π \\
+f = c/l\\
+k = 2π /l\\
+
+with the wavelength l and the gravitational acceleration g = 9,81m / s2. \\
+
+\includegraphics[width=0.7\textwidth]{Images/SinWaves.jpg}
+
+\label{fig:Bild1}
+
 
 \section{Realisation}
 
@@ -133,6 +161,10 @@ In order to allow for easier use of a two dimensional matrix of vertices, a wrap
 
 \subsubsection{Quad mesh}
 After creating the required data structure, a method to make a mesh for the waves.\\
+Custom data structure\\
+2-dimensional vector of QVector3D\\
+Dimensions: 50 x 50 -> Best result\\
+
 
 
 \subsection{Rendering as a wireframe}
@@ -142,13 +174,56 @@ Depending on the desired way of rendering the object, different draw methods are
 \subsubsection{Rendering as a solid}
 After drawing the object as a wireframe we want to draw it as a solid cube with lighting. This is being achieved in the method drawQuads() which once again iterates over the list of quads. This time using GL_Quads, the four vertices of a quad are connected and the area inbetween is filled. The normal vector for this is calculated using the cross product of the two diagonals vectors.
 
-\subsection{Calculation the wave height}
+\subsection{Recalculated Mesh}
+
+\framebox{
+
+\parbox[t][1.0cm]{4.50cm}{
+
+\addvspace{0.2cm} \centering 
+for(unsigned int i = 0; i < mesh.size(); i++){
+        for(unsigned int j = 0; j < mesh.at(0).size(); j++){
+            QVector3D * vec = mesh.at(i).at(j);
+
+            double y = calculateWaveHeight(vec->x(), vec->z(), time);
+
+            vec->setY(y);
 
 
-\subsection{Recalculate mesh}
+} 
+
+}\\
+ 
 
 
-\subsection{Vertex Shader}
+\subsection{Calculate the wave height}
+
+\framebox{
+
+\parbox[t][1.0cm]{4.50cm}{
+
+\addvspace{0.2cm} \centering 
+
+double distanceToOrigin = QVector2D(x,z).distanceToPoint(wave.O);
+
+double phi = -2 * wave.pi * wave.f * (time + wave.timeOffset);
+
+y += wave.a * cos(wave.k * distanceToOrigin + phi) / (distanceToOrigin + 1);
+
+
+} 
+
+}
+
+}
+
+\subsection{Reflextion}
+
+\includegraphics[width=0.7\textwidth]{Images/Reflextion.png}
+
+\label{fig:Bild1}
+
+
 
 
 \end{document}

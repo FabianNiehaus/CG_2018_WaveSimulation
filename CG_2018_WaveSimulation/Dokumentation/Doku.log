@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.4.18)  22 JUN 2018 23:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.4.18)  26 JUN 2018 23:03
 entering extended mode
-**./Documentation.tex
-(Documentation.tex
+**./Doku.tex
+(Doku.tex
 LaTeX2e <2017-04-15>
 Babel <3.18> and hyphenation patterns for 75 language(s) loaded.
 
@@ -358,6 +358,23 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
 LaTeX Info: Redefining \[ on input line 2817.
 LaTeX Info: Redefining \] on input line 2818.
 )
+("C:\Users\anhht\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\amsfonts.
+sty"
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)
+("C:\Users\anhht\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\amssymb.s
+ty"
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+)
+("C:\Users\anhht\AppData\Local\Programs\MiKTeX 2.9\tex\latex\collectbox\collect
+box.sty"
+Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
+\collectedbox=\box30
+)
 ("C:\Users\anhht\AppData\Local\Programs\MiKTeX 2.9\tex\latex\underscore\undersc
 ore.sty"
 Package: underscore 2006/09/13
@@ -488,7 +505,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 ("C:\Users\anhht\AppData\Local\Programs\MiKTeX 2.9\tex\latex\listings\listings.
 sty"
 \lst@mode=\count121
-\lst@gtempboxa=\box30
+\lst@gtempboxa=\box31
 \lst@token=\toks21
 \lst@length=\count122
 \lst@currlwidth=\dimen128
@@ -505,7 +522,7 @@ ty"
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 \c@lstnumber=\count127
 \lst@skipnumbers=\count128
-\lst@framebox=\box31
+\lst@framebox=\box32
 )
 ("C:\Users\anhht\AppData\Local\Programs\MiKTeX 2.9\tex\latex\listings\listings.
 cfg"
@@ -559,7 +576,7 @@ File: svgnam.def 2016/05/11 v2.12 Predefined colors according to SVG 1.1 (UK)
 ))
 ("C:\Users\anhht\AppData\Local\Programs\MiKTeX 2.9\tex\latex\esvect\esvect.sty"
 Package: esvect 
-\symesvector=\mathgroup4
+\symesvector=\mathgroup6
 )
 ("C:\Users\anhht\AppData\Local\Programs\MiKTeX 2.9\tex\latex\geometry\geometry.
 sty"
@@ -588,17 +605,17 @@ Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
 \LTpost=\skip86
 \LTchunksize=\count133
 \LTcapwidth=\dimen142
-\LT@head=\box32
-\LT@firsthead=\box33
-\LT@foot=\box34
-\LT@lastfoot=\box35
+\LT@head=\box33
+\LT@firsthead=\box34
+\LT@foot=\box35
+\LT@lastfoot=\box36
 \LT@cols=\count134
 \LT@rows=\count135
 \c@LT@tables=\count136
 \c@LT@chunks=\count137
 \LT@p@ftn=\toks25
 )
-Class scrartcl Info: longtable captions redefined on input line 32.
+Class scrartcl Info: longtable captions redefined on input line 37.
 
 ("C:\Users\anhht\AppData\Local\Programs\MiKTeX 2.9\tex\latex\koma-script\scrpag
 e2.sty"
@@ -613,26 +630,26 @@ Package scrpage2 Warning: usage of obsolete package!
 
 LaTeX Info: Redefining \pagemark on input line 180.
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 45.
+Package hyperref Info: Option `colorlinks' set `true' on input line 50.
+ (Doku.aux)
+\openout1 = `Doku.aux'.
 
-No file Documentation.aux.
-\openout1 = `Documentation.aux'.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 99.
+LaTeX Font Info:    ... okay on input line 99.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 99.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 87.
 ("C:\Users\anhht\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\t1lmr.fd"
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -641,7 +658,7 @@ ii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count138
 \scratchdimen=\dimen143
-\scratchbox=\box36
+\scratchbox=\box37
 \nofMPsegments=\count139
 \nofMParguments=\count140
 \everyMPshowfont=\toks26
@@ -677,11 +694,11 @@ sty"
 Package: ltcaption 2013/06/09 v1.4-94 longtable captions (AR)
 )
 Package caption Info: End \AtBeginDocument code.
-Package ragged2e Info: ABD: executing \RaggedRight on input line 87.
+Package ragged2e Info: ABD: executing \RaggedRight on input line 99.
  ABD: EverySelectfont initializing macros
-LaTeX Info: Redefining \selectfont on input line 87.
-\AtBeginShipoutBox=\box37
-Package hyperref Info: Link coloring ON on input line 87.
+LaTeX Info: Redefining \selectfont on input line 99.
+\AtBeginShipoutBox=\box38
+Package hyperref Info: Link coloring ON on input line 99.
 
 ("C:\Users\anhht\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\nameref.s
 ty"
@@ -693,11 +710,12 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count144
 )
-LaTeX Info: Redefining \ref on input line 87.
-LaTeX Info: Redefining \pageref on input line 87.
-LaTeX Info: Redefining \nameref on input line 87.
+LaTeX Info: Redefining \ref on input line 99.
+LaTeX Info: Redefining \pageref on input line 99.
+LaTeX Info: Redefining \nameref on input line 99.
+ (Doku.out) (Doku.out)
 \@outlinefile=\write3
-\openout3 = `Documentation.out'.
+\openout3 = `Doku.out'.
 
 \c@lstlisting=\count145
 
@@ -738,104 +756,110 @@ LaTeX Info: Redefining \nameref on input line 87.
 [1
 
 {C:/Users/anhht/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-LaTeX Font Info:    Try loading font information for T1+lmss on input line 108.
+LaTeX Font Info:    Try loading font information for T1+lmss on input line 120.
 
 
 ("C:\Users\anhht\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\t1lmss.fd"
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
+(Doku.toc)
 \tf@toc=\write4
-\openout4 = `Documentation.toc'.
+\openout4 = `Doku.toc'.
 
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 109.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 121.
 
 
 ("C:\Users\anhht\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\ot1lmr.fd"
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 109.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 121.
 
 
 ("C:\Users\anhht\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omllmm.fd"
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 109
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 121
 .
 
 ("C:\Users\anhht\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omslmsy.fd"
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 109
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 121
 .
 
 ("C:\Users\anhht\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omxlmex.fd"
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 109.
+(Font)              <12> on input line 121.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 109.
+(Font)              <8> on input line 121.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 109.
-LaTeX Font Info:    Try loading font information for U+esvect on input line 109
-.
+(Font)              <6> on input line 121.
+LaTeX Font Info:    Try loading font information for U+msa on input line 121.
 
+("C:\Users\anhht\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 121.
+("C:\Users\anhht\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Try loading font information for U+esvect on input line 121
+.
 ("C:\Users\anhht\AppData\Local\Programs\MiKTeX 2.9\tex\latex\esvect\uesvect.fd"
 File: uesvect.fd 
-) [0]
+) [0] (Doku.lof)
 \tf@lof=\write5
-\openout5 = `Documentation.lof'.
+\openout5 = `Doku.lof'.
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.112 \newpage
+l.124 \newpage
                [1]
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 124.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 124.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 124.
- [2]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 166.
- [3]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 166.
- (Documentation.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 166.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 166.
+Overfull \hbox (5.67337pt too wide) in paragraph at lines 132--132
+\T1/lmr/m/n/12 the pa-ram-e-ters wave-length, am-pli-tude and wave di-rec-tion 
+with a cer-tain vari-ance around 
+ []
 
+<Images/SinWaves.jpg, id=37, 300.12125pt x 132.495pt>
+File: Images/SinWaves.jpg Graphic file (type jpg)
+<use Images/SinWaves.jpg>
+Package pdftex.def Info: Images/SinWaves.jpg  used on input line 144.
+(pdftex.def)             Requested size: 317.07614pt x 139.99115pt.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 152.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 152.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 152.
+[2 <./Images/SinWaves.jpg>])
+Runaway argument?
+{ \par \parbox [t][1.0cm]{4.50cm}{ \par \addvspace {0.2cm} \centering \ETC.
+! File ended while scanning use of \fbox.
+<inserted text> 
+                \par 
+<*> ./Doku.tex
+              
+I suspect you have forgotten a `}', causing me
+to read past where you wanted me to stop.
+I'll try to recover; but if the error is serious,
+you'd better type `E' or `X' now and fix your file.
 
-Package rerunfilecheck Warning: File `Documentation.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
+! Emergency stop.
+<*> ./Doku.tex
+              
+*** (job aborted, no legal \end found)
 
-Package rerunfilecheck Info: Checksums for `Documentation.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  56DA6C9A6B81DD4C7961BBF6A1941012;1253.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 166.
- ) 
+ 
 Here is how much of TeX's memory you used:
- 12796 strings out of 493305
- 207506 string characters out of 3129802
- 413334 words of memory out of 3000000
- 16135 multiletter control sequences out of 15000+200000
- 65124 words of font info for 54 fonts, out of 3000000 for 9000
+ 13190 strings out of 493305
+ 212961 string characters out of 3129802
+ 413720 words of memory out of 3000000
+ 16509 multiletter control sequences out of 15000+200000
+ 67604 words of font info for 66 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 50i,11n,54p,9094b,394s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Users/anhht/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.en
-c}<C:/Users/anhht/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmbx1
-2.pfb><C:/Users/anhht/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/l
-mr10.pfb><C:/Users/anhht/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/l
-m/lmr12.pfb><C:/Users/anhht/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/publi
-c/lm/lmr7.pfb><C:/Users/anhht/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pub
-lic/lm/lmr8.pfb><C:/Users/anhht/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/p
-ublic/lm/lmro12.pfb><C:/Users/anhht/AppData/Local/Programs/MiKTeX 2.9/fonts/typ
-e1/public/lm/lmssbx10.pfb>
-Output written on Documentation.pdf (5 pages, 184558 bytes).
-PDF statistics:
- 81 PDF objects out of 1000 (max. 8388607)
- 25 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
-
+ 50i,12n,54p,9085b,394s stack positions out of 5000i,500n,10000p,200000b,50000s
+!  ==> Fatal error occurred, no output PDF file produced!
