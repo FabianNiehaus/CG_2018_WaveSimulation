@@ -130,20 +130,37 @@ In this project we will build a C++ application to simulate circular waves on a 
 \section{Wave theory}
 An obvious way to represent waves is through sine or cosine functions. If one chooses the parameters wavelength, amplitude and wave direction with a certain variance around specified basic values and superimposes a number of these waves, this results in at least one water-like wave train. The following formula results for a sum of sine waves, which are visualized by the Heigth Field H. The water is at rest in the x / z plane of a coordinate system.\\
 
-This results in an altitude value in the height field for each position (x, z), with the amplitude a, the direction vector D and a phase shift φ. D stands parallel to the stationary water surface and perpendicular to the associated wave train and the phase velocity c, the frequency f and the so-called wave number k are defined by \\
+In this project, we will use a basic cosine wave with variable parameters for amplitude, wavelength and point of origin (POI). A cosine wave with circular expansion can be calculated using the formula
 
-c =g·l 2π \\
-f = c/l\\
-k = 2π /l\\
+$$$$
+\captionof{figure}{MATH!}
+\ \\
+where \textit{a} describes the wave's amplitude, \textit{k} describes the wave number, $\Delta$ describes the distance to the wave's POI and $\Phi$ describes the phase shift.\\
+\ \\
+\textit{k} is defined as $(2\pi)/l$, where \textit{l} is the wavelength.\\
+\ \\
+$\Phi$ is defined as $-2 * \pi * f * (t + \Theta)$.\\
+\ \\
+\text{f} is defined as $c / l$.\\
+\ \\
+\textit{c} is defined as $g * l * 2\pi$, where g is the Earth's gravitational acceleration of $9.81 m/s^2$.\\
+\ \\
+As this project aims for a somewhat realistic behaviour of the wave, the amplitude needs to diminish with incresing distance to the wave's point of origin. In order to accomplish that effect, the distance to POI is factored in a second time:
 
-with the wavelength l and the gravitational acceleration g = 9,81m / s2. \\
+$$$$
+\captionof{figure}{MORE MATH!}
+
+Using this formula, the height for every point of a mesh can be calculated.
+
 
 \includegraphics[width=0.7\textwidth]{Images/SinWaves.jpg}
+\captionof{figure}{Determining adjacent quads (pseudo code)} 
+
 
 \section{Realisation}
 
-\subsection{Creating a basic interface with QT}
-First off, we create a new QT widget application. This allows us to use QT Creators design feature to set up our application's interface. A new QOpenGLWidget is placed and will be used as a placeholder for a new custom class inheriting QOpenGLWidgets functionality. This class, called OGLWidget, needs to implement the following methods: initializeGL (for setting up OpenGL), paintGL (for doing the actual rendering), resizeGL (for handling resizes of the display window). Additionally, the functions stepAnimation SetMaterialColor and InitLightingAndProjection\footnote{Taken from Prof. Dr. Martin Hering-Bertrams OpenGL_Example} are used.
+\subsection{Creating an interface with QT}
+First off, we create a new QT widget application. This allows us to use QT Creators design feature to set up our application's interface. A new QOpenGLWidget is placed and will be used as a placeholder for a new custom class inheriting QOpenGLWidgets functionality. This class, called OGLWidget, needs to implement the following methods: initializeGL (for setting up OpenGL), paintGL (for doing the actual rendering) and resizeGL (for handling resizes of the display window). Additionally, the functions stepAnimation SetMaterialColor and InitLightingAndProjection\footnote{Taken from Prof. Dr. Martin Hering-Bertrams OpenGL_Example} are used.
 
 \subsection{Creating the data structure}
 The data structure is separated in different classes. \\
@@ -181,6 +198,7 @@ After drawing the object as a wireframe we want to draw it as a solid cube with 
 \subsection{Reflection}
 
 \includegraphics[width=0.7\textwidth]{Images/Reflextion.png}
+\captionof{figure}{Determining adjacent quads (pseudo code)} 
 
 
 
