@@ -132,25 +132,32 @@ An obvious way to represent waves is through sine or cosine functions. If one ch
 
 In this project, we will use a basic cosine wave with variable parameters for amplitude, wavelength and point of origin (POI). A cosine wave with circular expansion can be calculated using the formula
 
-$$$$
+$$P(x,z,t) = a * \cos(k * {\Delta}O + \Phi) $$
 \captionof{figure}{MATH!}
 \ \\
-where \textit{a} describes the wave's amplitude, \textit{k} describes the wave number, $\Delta$ describes the distance to the wave's POI and $\Phi$ describes the phase shift.\\
+where \textit{a} describes the wave's amplitude, \textit{k} describes the wave number, ${\Delta}O$ describes the distance to the wave's POI and $\Phi$ describes the phase shift.\\
 \ \\
-\textit{k} is defined as $(2\pi)/l$, where \textit{l} is the wavelength.\\
+\begin{center}
+	\begin{tabular}{ll}
+		Wavelength: & $l$ \\
+		Time: & $t$ \\
+		Wave Number: & $k = \frac{2\pi}{l}$ \\
+		Phase Shift: & $\Phi = -2 * \pi * f * t$ \\
+		Frequency: & $f = \frac{c}{l}$ \\
+		Phase Velocity: & $c = g * l * 2\pi$ \\
+		Gravitational Acceleration: & $g = 9.81 m/s^2$
+	\end{tabular}
+	\captionof{table}{MORE MATH!}
+\end{center}
 \ \\
-$\Phi$ is defined as $-2 * \pi * f * (t + \Theta)$.\\
-\ \\
-\text{f} is defined as $c / l$.\\
-\ \\
-\textit{c} is defined as $g * l * 2\pi$, where g is the Earth's gravitational acceleration of $9.81 m/s^2$.\\
-\ \\
-As this project aims for a somewhat realistic behaviour of the wave, the amplitude needs to diminish with incresing distance to the wave's point of origin. In order to accomplish that effect, the distance to POI is factored in a second time:
+As this project aims for a somewhat realistic behaviour of the wave, the amplitude needs to diminish with increasing distance to the wave's point of origin. In order to accomplish this effect, the distance to POI is factored in a second time:
 
-$$$$
+$$P(x,z,t) = a * \cos(k * {\Delta}O + \Phi) * \frac{1}{{\Delta}O+1} $$
 \captionof{figure}{MORE MATH!}
-
-Using this formula, the height for every point of a mesh can be calculated.
+\ \\
+As ${\Delta}O$ equals $0$ at the wave's POI and multiplier always need to be less than $1$, 1 is added to ${\Delta}O$ in the multipliers divisor.\\
+\ \\
+Using this formula, the height for every point of a mesh can be calculated.\\
 
 
 \includegraphics[width=0.7\textwidth]{Images/SinWaves.jpg}
