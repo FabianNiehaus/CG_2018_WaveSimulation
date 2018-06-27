@@ -1,4 +1,4 @@
-\documentclass[12pt,a4paper]{scrartcl}
+﻿\documentclass[12pt,a4paper]{scrartcl}
 
 \usepackage[english]{babel}
 \usepackage[T1]{fontenc}
@@ -127,18 +127,39 @@
 \section{Abstract}
 In this project we will build a C++ application to simulate circular waves on a 3D mesh surface. We will also simulate reflection using the Image Source Method. We will use QT Creator for programming, QT for window management and OpenGL for 3D rendering.
 
-\section{Wave theory}
+\section{Wave theory}\label{wave-theory}
 An obvious way to represent waves is through sine or cosine functions. If one chooses the parameters wavelength, amplitude and wave direction with a certain variance around specified basic values and superimposes a number of these waves, this results in at least one water-like wave train. The following formula results for a sum of sine waves, which are visualized by the Heigth Field H. The water is at rest in the x / z plane of a coordinate system.\\
 
 This results in an altitude value in the height field for each position (x, z), with the amplitude a, the direction vector D and a phase shift φ. D stands parallel to the stationary water surface and perpendicular to the associated wave train and the phase velocity c, the frequency f and the so-called wave number k are defined by \\
+$$P(x,z,t) = a * \cos(k * {\Delta}O + \Phi) $$
+\captionof{figure}{MATH!}
+\ \\
+where \textit{a} describes the wave's amplitude, \textit{k} describes the wave number, ${\Delta}O$ describes the distance to the wave's POI and $\Phi$ describes the phase shift.\\
+\ \\
+\begin{center}
+	\begin{tabular}{ll}
+		Wavelength: & $l$ \\
+		Time: & $t$ \\
+		Wave Number: & $k = \frac{2\pi}{l}$ \\
+		Phase Shift: & $\Phi = -2 * \pi * f * t$ \\
+		Frequency: & $f = \frac{c}{l}$ \\
+		Phase Velocity: & $c = g * l * 2\pi$ \\
+		Gravitational Acceleration: & $g = 9.81 m/s^2$
+	\end{tabular}
+	\captionof{figure}{MORE MATH!}
+\end{center}
+\ \\
+As this project aims for a somewhat realistic behaviour of the wave, the amplitude needs to diminish with increasing distance to the wave's point of origin. In order to accomplish this effect, the distance to POI is factored in a second time:
 
-c =g·l 2π \\
-f = c/l\\
-k = 2π /l\\
-
-with the wavelength l and the gravitational acceleration g = 9,81m / s2. \\
+$$P(x,z,t) = a * \cos(k * {\Delta}O + \Phi) * \frac{1}{{\Delta}O+1} $$
+\captionof{figure}{MORE MATH!}
+\ \\
+As ${\Delta}O$ equals $0$ at the wave's POI and multiplier needs to always be less than $1$, $1$ is added to ${\Delta}O$ in the multiplier's divisor.\\
+\ \\
+Using this formula, the height for every point of a mesh can be calculated. This formula can also be used to calculate multiple overlapping waves. In that case, the new height for a point is the sum of all waves.\\
 
 \includegraphics[width=0.7\textwidth]{Images/SinWaves.jpg}
+\captionof{figure}{Determining adjacent quads (pseudo code)} 
 
 \section{Realisation}
 
@@ -154,12 +175,12 @@ In order to allow for easier use of a two dimensional matrix of vertices, a wrap
 
 
 \subsection{Creating the surface mesh}
-After creating the required data structure, a method to make a mesh for the waves.\\
-Custom data structure\\
-2-dimensional vector of QVector3D\\
-Dimensions: 50 x 50 -> Best result\\
+The surface mesh consists of a two dimensional list of QVector3Ds, QT's own implementation of a three value vector. These vectors store a single point's x, y and z coordinates. We settled on a dimension of 50 x 50, which is sufficient from both a graphical and performance point of view.\\
+The mesh is located in the x-z-plane, meaning the waves' 'height' is calculated in y-direction.\\
 
 \subsection{Calculating the wave height}
+Using the formula explained in \hyperref[wave-theory]{Wave Theory}, a function  which calculates the sum of amplitudes for all waves for every point of the mesh is implemented.
+
 \begin{lstlisting}[language=PSEUDO]
 double distanceToOrigin = QVector2D(x,z).distanceToPoint(wave.O);
 
