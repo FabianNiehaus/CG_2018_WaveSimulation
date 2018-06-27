@@ -161,15 +161,31 @@ Dimensions: 50 x 50 -> Best result\\
 
 \subsection{Calculating the wave height}
 \begin{lstlisting}[language=PSEUDO]
-for each quad
-for i = 0 to 3 // since each quad has 4 vertices
-a = index of vertex at i
-b = index of vertex at (i+1)%4
-for each quad that is not the current one
-compare all vertices to a and b
-if a and b have a match
-add index of quad to current quads list of neighbors at index i 
+double distanceToOrigin = QVector2D(x,z).distanceToPoint(wave.O);
+
+double phi = -2 * wave.pi * wave.f * (time + wave.timeOffset);
+
+y += wave.a * cos(wave.k * distanceToOrigin + phi) / (distanceToOrigin + 1);
+
 \end{lstlisting}
+
+\captionof{figure}{Determining adjacent quads (pseudo code)} 
+
+\begin{lstlisting}[language=PSEUDO]
+F = exp( i*abs(X*2*pi/8.5))
+freq = 10;
+
+for t=0:.001:1
+phi = -2*pi*freq*t
+F1 = exp( i* phi) * F;
+plot( X, real(F1));
+axis([-50 50 -5 5]);
+drawnow
+end
+
+
+\end{lstlisting}
+
 \captionof{figure}{Determining adjacent quads (pseudo code)} 
 
 \subsection{Rendering as a wireframe}
@@ -179,10 +195,49 @@ Depending on the desired way of rendering the object, different draw methods are
 After drawing the object as a wireframe we want to draw it as a solid cube with lighting. This is being achieved in the method drawQuads() which once again iterates over the list of quads. This time using GL_Quads, the four vertices of a quad are connected and the area inbetween is filled. The normal vector for this is calculated using the cross product of the two diagonals vectors.
 
 \subsection{Reflection}
+\begin{lstlisting}[language=PSEUDO]
+// Benachbarte Ursprungspunkte berechnen
+        QVector2D n1 = QVector2D(-1 * meshDim_X - sourceX, meshDim_Z - sourceZ); // links oben
+        QVector2D n2 = QVector2D(sourceX, meshDim_Z - sourceZ); // oben
+        QVector2D n3 = QVector2D(meshDim_X - sourceX, meshDim_Z - sourceZ); // rechts oben
+        QVector2D n4 = QVector2D(-1 * meshDim_X - sourceX, sourceZ); // links
+        QVector2D n5 = QVector2D(meshDim_X - sourceX, sourceZ); // rechts
+        QVector2D n6 = QVector2D(-1 * meshDim_X - sourceX, -1 * meshDim_Z - sourceZ); // links unten
+        QVector2D n7 = QVector2D(sourceX, -1 * meshDim_Z - sourceZ); // unten
+        QVector2D n8 = QVector2D(meshDim_X - sourceX, -1 * meshDim_Z - sourceZ); // rechts unten
 
+        // Urpsungspunkt ausgeben für Debugging
+        cout << "N1: " << n1.x() << " | " << n1.y() << endl;
+        cout << "N2: " << n2.x() << " | " << n2.y() << endl;
+        cout << "N3: " << n3.x() << " | " << n3.y() << endl;
+        cout << "N4: " << n4.x() << " | " << n4.y() << endl;
+        cout << "N5: " << n5.x() << " | " << n5.y() << endl;
+        cout << "N6: " << n6.x() << " | " << n6.y() << endl;
+        cout << "N7: " << n7.x() << " | " << n7.y() << endl;
+        cout << "N8: " << n8.x() << " | " << n8.y() << endl;
+
+        // Wellen mit entsprechenden Ursprungspunkten einfügen
+        waveSurface->addWave(Wave (amplitude, wavelength, 0.0, n1));
+        waveSurface->addWave(Wave (amplitude, wavelength, 0.0, n2));
+        waveSurface->addWave(Wave (amplitude, wavelength, 0.0, n3));
+        waveSurface->addWave(Wave (amplitude, wavelength, 0.0, n4));
+        waveSurface->addWave(Wave (amplitude, wavelength, 0.0, n5));
+        waveSurface->addWave(Wave (amplitude, wavelength, 0.0, n6));
+        waveSurface->addWave(Wave (amplitude, wavelength, 0.0, n7));
+        waveSurface->addWave(Wave (amplitude, wavelength, 0.0, n8));
+
+
+
+\end{lstlisting}
+
+\captionof{figure}{Determining adjacent quads (pseudo code)} 
 \includegraphics[width=0.7\textwidth]{Images/Reflextion.png}
 
 
-
+\subsection{Fazit}
+\includegraphics[width=0.7\textwidth]{Images/Wave1.jpg}
+\includegraphics[width=0.7\textwidth]{Images/WavewithReflextion.jpg}
+\includegraphics[width=0.7\textwidth]{Images/xAndy.jpg}
+\includegraphics[width=0.7\textwidth]{Images/HighaAndl.jpg}
 
 \end{document}
