@@ -41,3 +41,14 @@ target_wrapper.*
 
 # QtCreator CMake
 CMakeLists.txt.user*
+
+# Latex files
+*.aux
+*.lof
+*.log
+*.out
+*.synctex.gz
+*.toc
+
+# Word files
+*.docx
