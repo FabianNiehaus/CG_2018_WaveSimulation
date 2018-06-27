@@ -1,4 +1,4 @@
-﻿\documentclass[12pt,a4paper]{scrartcl}
+\documentclass[12pt,a4paper]{scrartcl}
 
 \usepackage[english]{babel}
 \usepackage[T1]{fontenc}
@@ -209,11 +209,14 @@ end
 
 \captionof{figure}{Determining adjacent quads (pseudo code)} 
 
-\subsection{Rendering as a wireframe}
-Depending on the desired way of rendering the object, different draw methods are implemented. These methods are then being called from the paintGL() function.
+\subsection{Rendering}
+In order to display the mesh on the screen, OpenGL needs to be instructed to render the points. Before rendering, the original coordinate system is rotated by 45° in positive x and negative y direction so the mesh is visible from an angle. Then, the specific rendering methods are called.
 
-\subsection{Rendering as an opaque surface}
-After drawing the object as a wireframe we want to draw it as a solid cube with lighting. This is being achieved in the method drawQuads() which once again iterates over the list of quads. This time using GL_Quads, the four vertices of a quad are connected and the area inbetween is filled. The normal vector for this is calculated using the cross product of the two diagonals vectors.
+\subsubsection{Rendering as a wireframe}
+First, the mesh is draw as a wireframe using the method drawMeshWireFrame(). This function connects all mesh points into triangles and the draws them on the screen.
+
+\subsubsection{Rendering as an opaque surface}
+After drawing the object as a wireframe we want to draw it as an opaque surface with lighting. This is being achieved in the method drawMeshQuads() which connects all points into quads. This time using GL_Quads, the four vertices of a quad are connected and the area inbetween is filled. The normal vector for this is calculated using the cross product of the two diagonals vectors.
 
 \subsection{Reflection}
 
