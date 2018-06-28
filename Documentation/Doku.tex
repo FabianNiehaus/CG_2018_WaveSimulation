@@ -132,10 +132,15 @@
 \section{Abstract}
 In this project we will build a C++ application to simulate circular waves on a 3D mesh surface. We will also simulate reflection using the Image Source Method. We will use QT Creator for programming, QT for window management and OpenGL for 3D rendering.
 
-\includegraphics[width=0.7\textwidth]{Images/SinWaves.jpg}
-\captionof{figure}{Determining adjacent quads (pseudo code)} 
+
 
 \section{Wave theory}\label{wave-theory}
+
+\begin{center}
+	\includegraphics[width=0.5\textwidth]{Images/Concept.jpg}
+	\captionof{figure}{Circular sine wave (\citefield{waveConceptPic}{title} \citefield{waveConceptPic}{year})}
+\end{center} 
+
 In this project, we will use a basic cosine wave with variable parameters for amplitude, wavelength and point of origin (POI). This function is derived from a complex wave function of which we only use the real part.
 \begin{lstlisting}[language=PSEUDO]
 X = linspace( -50, 50, 201); % 201 samples from -50 to 50
@@ -214,8 +219,18 @@ In order to display the mesh on the screen, OpenGL needs to be instructed to ren
 \subsubsection{Rendering as a wireframe}
 First, the mesh is draw as a wireframe using the method drawMeshWireFrame(). This function connects all mesh points into triangles and the draws them on the screen.
 
+\begin{center}
+	\includegraphics[width=0.5\textwidth]{Images/RenderingWireframe.jpg}
+	\captionof{figure}{Rendering as wireframe}
+\end{center} 
+
 \subsubsection{Rendering as an opaque surface}
 After drawing the object as a wireframe we want to draw it as an opaque surface with lighting. This is being achieved in the method drawMeshQuads() which connects all points into quads. This time using GL_Quads, the four vertices of a quad are connected and the area inbetween is filled. The normal vector for this is calculated using the cross product of the two diagonals vectors.
+
+\begin{center}
+	\includegraphics[width=0.5\textwidth]{Images/RenderingOpaque.jpg}
+	\captionof{figure}{Rendering as opaque surface}
+\end{center} 
 
 \subsection{Wave peflection}
 In this project, we also aimed to simulated reflection of the waves as if our mesh was a body of water located inside a rectangular container.
@@ -266,7 +281,7 @@ Inputs are made via sliders for numerical values and a checkbox for on/off value
 	\captionof{figure}{User Inputs}
 \end{center}
 
-Every slider is connected to a corresponding function with the program using QT's SIGNAL-SLOT mechanism \parencite[compare to][]{slidersExample}. For example, the slider for the OPs x coordinate is connected to the updateWaveX() method of the program.\\
+Every slider is connected to a corresponding function with the program using QT's SIGNAL-SLOT mechanism (compare to \citefield{slidersExample}{title}, The QT Company \citefield{slidersExample}{year}). For example, the slider for the OPs x coordinate is connected to the updateWaveX() method of the program.\\
 Whenever an input is changed, the updateWaves() function is called from the connected funtion. Every value except the changed one is copied from the current state and all waves are subsequently deleted and then newly created with the new parameter.
 
 \begin{lstlisting}[language=PSEUDO]
@@ -277,7 +292,8 @@ if relfection is active
 \end{lstlisting}
 \captionof{figure}{Updating the waves (pseudo code)}
 
-\subsection{Finished application}
+\subsection{Full application}
+The following application is the functional result of implementing all aspects listed above:
 
 \section{Conclusion}
 We were able to create a simple wave simulator with wave reflection and user inputs. We gained deeper understandig of the mathematics involved in wave calculation and reflection.\\
