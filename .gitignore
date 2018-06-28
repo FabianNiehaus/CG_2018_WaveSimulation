@@ -49,6 +49,10 @@ CMakeLists.txt.user*
 *.out
 *.synctex.gz
 *.toc
+*.bbl
+*.bcf
+*.blg
+*.run.xml
 
 # Word files
 *.docx

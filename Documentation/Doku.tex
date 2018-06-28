@@ -24,7 +24,7 @@
 % Für Verwendung von Farben
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
 
-% Für Verktor-Pfeile
+% Für Vektor-Pfeile
 \usepackage{esvect}
 
 % Für Größe der Seitenränder
@@ -37,7 +37,11 @@
 \usepackage[automark]{scrpage2}
 
 % Für Bildunterschriften
-\usepackage[aboveskip=2pt]{caption}
+\usepackage[aboveskip=2pt, belowskip=10pt]{caption}
+
+% Für Quellenverzeichnis
+\usepackage[style=authoryear]{biblatex}
+\addbibresource{\jobname.bib}
 
 % Formatierung für Hyperref-Referenzen
 \hypersetup{
@@ -79,6 +83,7 @@
         \fbox{\BOXCONTENT}%
     }%
 }
+
 \makeatother
 \title{Water simulation in OpenGL}
 \author{Fabian Niehaus, Tuyet Nguyen}
@@ -127,14 +132,32 @@
 \section{Abstract}
 In this project we will build a C++ application to simulate circular waves on a 3D mesh surface. We will also simulate reflection using the Image Source Method. We will use QT Creator for programming, QT for window management and OpenGL for 3D rendering.
 
-\section{Wave theory}\label{wave-theory}
-An obvious way to represent waves is through sine or cosine functions. If one chooses the parameters wavelength, amplitude and wave direction with a certain variance around specified basic values and superimposes a number of these waves, this results in at least one water-like wave train. The following formula results for a sum of sine waves, which are visualized by the Heigth Field H. The water is at rest in the x / z plane of a coordinate system.\\
+\includegraphics[width=0.7\textwidth]{Images/SinWaves.jpg}
+\captionof{figure}{Determining adjacent quads (pseudo code)} 
 
-This results in an altitude value in the height field for each position (x, z), with the amplitude a, the direction vector D and a phase shift φ. D stands parallel to the stationary water surface and perpendicular to the associated wave train and the phase velocity c, the frequency f and the so-called wave number k are defined by \\
-$$P(x,z,t) = a * \cos(k * {\Delta}O + \Phi) $$
-\captionof{figure}{MATH!}
+\section{Wave theory}\label{wave-theory}
+In this project, we will use a basic cosine wave with variable parameters for amplitude, wavelength and point of origin (POI). This function is derived from a complex wave function of which we only use the real part.
+\begin{lstlisting}[language=PSEUDO]
+X = linspace( -50, 50, 201); % 201 samples from -50 to 50
+
+% complex wave centered at x=-17, wave length = 8.5
+F = exp( i*abs(X*2*pi/8.5)); % first wave
+freq = 10;
+for t=0:.001:1 % one second in steps of milliseconds
+	phi = -2*pi*freq*t; % phase shift due to time delay
+	F1 = exp( i* phi) * F; % add phase shift to F
+	plot( X, real(F1)); % plot real part
+	axis([-50 50 -5 5]); % define figure scale
+	drawnow
+end
+\end{lstlisting}
+\captionof{figure}{Complex Wave Equation in Matlab \parencite{cgLec}} 
+
+A cosine wave with circular expansion can be calculated using the formula
+$$P(x,z,t) = a * \cos(k * {\Delta} + \Phi) $$
+\captionof{figure}{Circular cosine wave function}
 \ \\
-where \textit{a} describes the wave's amplitude, \textit{k} describes the wave number, ${\Delta}O$ describes the distance to the wave's POI and $\Phi$ describes the phase shift.\\
+where \textit{a} describes the wave's amplitude, \textit{k} describes the wave number, ${\Delta}$ describes the distance to the wave's OP and $\Phi$ describes the phase shift.\\
 \ \\
 \begin{center}
 	\begin{tabular}{ll}
@@ -146,20 +169,17 @@ where \textit{a} describes the wave's amplitude, \textit{k} describes the wave n
 		Phase Velocity: & $c = g * l * 2\pi$ \\
 		Gravitational Acceleration: & $g = 9.81 m/s^2$
 	\end{tabular}
-	\captionof{figure}{MORE MATH!}
+	\captionof{figure}{Variable definitions \parencite{waterSim}}
 \end{center}
 \ \\
-As this project aims for a somewhat realistic behaviour of the wave, the amplitude needs to diminish with increasing distance to the wave's point of origin. In order to accomplish this effect, the distance to POI is factored in a second time:
+As this project aims for a somewhat realistic behaviour of the wave, the amplitude needs to diminish with increasing distance to the wave's point of origin. In order to accomplish this effect, the distance to OP is factored in a second time:
 
-$$P(x,z,t) = a * \cos(k * {\Delta}O + \Phi) * \frac{1}{{\Delta}O+1} $$
-\captionof{figure}{MORE MATH!}
+$$P(x,z,t) = a * \cos(k * {\Delta} + \Phi) * \frac{1}{{\Delta}+1} $$
+\captionof{figure}{Circular cosine wave function with diminishing amplitude}
 \ \\
-As ${\Delta}O$ equals $0$ at the wave's POI and multiplier needs to always be less than $1$, $1$ is added to ${\Delta}O$ in the multiplier's divisor.\\
+As ${\Delta}$ equals $0$ at the wave's OP and multiplier needs to always be less than $1$, $1$ is added to ${\Delta}$ in the multiplier's divisor.\\
 \ \\
 Using this formula, the height for every point of a mesh can be calculated. This formula can also be used to calculate multiple overlapping waves. In that case, the new height for a point is the sum of all waves.\\
-
-\includegraphics[width=0.7\textwidth]{Images/SinWaves.jpg}
-\captionof{figure}{Determining adjacent quads (pseudo code)} 
 
 \section{Realisation}
 
@@ -168,46 +188,25 @@ First off, we create a new QT widget application. This allows us to use QT Creat
 
 \subsection{Creating the data structure}
 The data structure is separated in different classes. \\
-The basic class "Waves" contains the contains the information of the waves like sine waves, Height-Field, coordinate, direction vector, phase velocity, the frequency and the wave number.  \\ 
-The class "Wavesurface" contains the wavesfunction . 
-Logic and data regarding the computation of quad meshes is stored in a seperate class, as are Bezier surfaces and rotational sweep surfaces. \\
-In order to allow for easier use of a two dimensional matrix of vertices, a wrapper class containing a two dimensional vector of vertices is introduces. \\
-
+The class "Wave" contains a single wave's parameters such as wavelength \textit{l}, amplitude \textit{a} and point of origin $\Delta$. It also holds the values for wave number \textit{k}, phase speed \textit{c} and frequency \textit{f}, which are calculated when the object is instanciated. \\ 
+The class "Wavesurface" contains the surface mesh as well as the logic for calculating the mesh height.
 
 \subsection{Creating the surface mesh}
-The surface mesh consists of a two dimensional list of QVector3Ds, QT's own implementation of a three value vector. These vectors store a single point's x, y and z coordinates. We settled on a dimension of 50 x 50, which is sufficient from both a graphical and performance point of view.\\
+The surface mesh consists of a two dimensional list of QVector3Ds, QT's own implementation of a three value vector. These vectors store a single point's x, y and z coordinates. We settled on a dimension of 50 x 50, which is sufficient from both a graphical and a performance point of view.\\
 The mesh is located in the x-z-plane, meaning the waves' 'height' is calculated in y-direction.\\
 
-\subsection{Calculating the wave height}
-Using the formula explained in \hyperref[wave-theory]{Wave Theory}, a function  which calculates the sum of amplitudes for all waves for every point of the mesh is implemented.
+\subsection{Calculating the mesh height}
+Using the formula $P(x,z,t) = a * \cos(k * {\Delta} + \Phi) * \frac{1}{{\Delta}+1} $ explained under \hyperref[wave-theory]{Wave Theory}, a function  which calculates the sum of amplitudes for all waves for every point of the mesh is implemented.
 
 \begin{lstlisting}[language=PSEUDO]
-double distanceToOrigin = QVector2D(x,z).distanceToPoint(wave.O);
-
-double phi = -2 * wave.pi * wave.f * (time + wave.timeOffset);
-
-y += wave.a * cos(wave.k * distanceToOrigin + phi) / (distanceToOrigin + 1);
-
+for each mesh row
+	for each mesh column
+		double height //Hoehe
+		for each wave
+			add result of formula stated above to height
+		set y of current Point to height
 \end{lstlisting}
-
-\captionof{figure}{Determining adjacent quads (pseudo code)} 
-
-\begin{lstlisting}[language=PSEUDO]
-F = exp( i*abs(X*2*pi/8.5))
-freq = 10;
-
-for t=0:.001:1
-phi = -2*pi*freq*t
-F1 = exp( i* phi) * F;
-plot( X, real(F1));
-axis([-50 50 -5 5]);
-drawnow
-end
-
-
-\end{lstlisting}
-
-\captionof{figure}{Determining adjacent quads (pseudo code)} 
+\captionof{figure}{Calculating mesh height (pseudo code)} 
 
 \subsection{Rendering}
 In order to display the mesh on the screen, OpenGL needs to be instructed to render the points. Before rendering, the original coordinate system is rotated by 45° in positive x and negative y direction so the mesh is visible from an angle. Then, the specific rendering methods are called.
@@ -218,15 +217,80 @@ First, the mesh is draw as a wireframe using the method drawMeshWireFrame(). Thi
 \subsubsection{Rendering as an opaque surface}
 After drawing the object as a wireframe we want to draw it as an opaque surface with lighting. This is being achieved in the method drawMeshQuads() which connects all points into quads. This time using GL_Quads, the four vertices of a quad are connected and the area inbetween is filled. The normal vector for this is calculated using the cross product of the two diagonals vectors.
 
-\subsection{Reflection}
+\subsection{Wave Reflection}
+In this project, we also aimed to simulated reflection of the waves as if our mesh was a body of water located inside a rectangular container.
 
-\includegraphics[width=0.7\textwidth]{Images/Reflextion.png}
+\begin{center}
+	\includegraphics[width=0.5\textwidth]{Images/Reflection.jpg}
+	\captionof{figure}{Circular Waves reflecting on a straight barrier \parencite{reflectionConceptPic}}
+\end{center}
 
+In order to achieve this effect, the so called Image Source Method was used. This method simulates reflection by placing another wave on the other side of the felection obstacle. The OP of this additional wave is placed at the same distance to the obstacle that the original wave's OP is at.
 
-\subsection{Fazit}
-\includegraphics[width=0.7\textwidth]{Images/Wave1.jpg}
-\includegraphics[width=0.7\textwidth]{Images/WavewithReflextion.jpg}
-\includegraphics[width=0.7\textwidth]{Images/xAndy.jpg}
-\includegraphics[width=0.7\textwidth]{Images/HighaAndl.jpg}
+\begin{center}
+	\includegraphics[width=0.6\textwidth]{Images/ImageSourceMethod.jpg}
+	\captionof{figure}{Image Source Method \parencite{imageSourcePic}}
+\end{center}
+
+To ensure an acceptable level of reflection, we placed an additional wave in each of the eight neighboring tiles. This way, the original wave is reflected from each direction.
+
+\begin{lstlisting}[language=PSEUDO]
+meshX = dimension of mesh in x direction
+meshZ = dimenstion of mesh in z direction
+origX = x value of original wave's OP
+origX = z value of original wave's OP
+
+w1_Origin = (-1 * meshX - origX, mesh/ - origZ); // links oben
+w2_Origin = (origX, mesh/ - origZ); // oben
+w3_Origin = (meshX - origX, mesh/ - origZ); // rechts oben
+w4_Origin = (-1 * meshX - origX, origZ); // links
+w5_Origin = (meshX - origX, origZ); // rechts
+w6_Origin = (-1 * meshX - origX, -1 * mesh/ - origZ); // links unten
+w7_Origin = (origX, -1 * mesh/ - origZ); // unten
+w8_Origin = (meshX - origX, -1 * mesh/ - origZ); // rechts unten
+\end{lstlisting}
+\captionof{figure}{Calculating OPs for reflection waves (pseudo code)}
+
+\subsection{Dynamic Parameters}
+In the last step, inputs for dynamic parameters were implemented. The following wave and program parameters can be set at runtime:
+\begin{itemize}
+	\item Amplitude
+	\item Wavelength
+	\item Point of origin
+	\item Reflection (On / Off)
+\end{itemize}
+
+Inputs are made via sliders for numerical values and a checkbox for on/off values.
+\begin{center}
+	\includegraphics[width=0.5\textwidth]{Images/Inputs.jpg}
+	\captionof{figure}{User Inputs}
+\end{center}
+
+Every slider is connected to a corresponding function with the program using QT's SIGNAL-SLOT mechanism \parencite[compare to][]{slidersExample}. For example, the slider for the OPs x coordinate is connected to the updateWaveX() method of the program.\\
+Whenever an input is changed, the updateWaves() function is called from the connected funtion. Every value except the changed one is copied from the current state and all waves are subsequently deleted and then newly created with the new parameter.
+
+\begin{lstlisting}[language=PSEUDO]
+delete all waves
+create new origin wave (amplitude, wavelength, OP)
+if relfection is active
+	create the 8 corresponding reflection waves
+\end{lstlisting}
+\captionof{figure}{Updating the waves (pseudo code)}
+
+\section{Conclusion}
+We were able to create a simple wave simulator with wave reflection and user inputs. We gained deeper understandig of the mathematics involved in wave calculation and reflection.\\
+Further improvements to the simulation could be made by using so-called Gerstner waves instead of cosine wave. These waves resemble the actual behaviour of water more closely. The mesh calculations could also be offloaded into the GPU via the use of shaders. Shadres would also allow for more realistic display of water, including refraction and skybox reflection.\\
+
+\section{Acknowledgements}
+\begin{itemize}
+	\item The Wolfram Alpha computational engine for helping out with some of the mathematics involved
+	\item The QT Company, GitHub, the developers of TeXStudio and the developers of MiKTEX for letting us use their software free of charge
+	\item Prof. Dr. Martin Hering-Bertram for providing the OpenGL example code for coloring, lighting and projection used in the project
+\end{itemize}
+
+\section{References}
+
+\printbibliography[title=Sources,nottype=misc]
+\printbibliography[title=Pictures,type=misc]
 
 \end{document}

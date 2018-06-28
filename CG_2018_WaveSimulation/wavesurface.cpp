@@ -94,7 +94,7 @@ double WaveSurface::calculateWaveHeight(double x, double z, double time)
         double distanceToOrigin = QVector2D(x,z).distanceToPoint(wave.O);
 
         // Phasenverschiebung
-        double phi = -2 * wave.pi * wave.f * (time + wave.timeOffset);
+        double phi = -2 * wave.pi * wave.f * time;
 
         // Wellenlänge * cos( Wellenzahl * Abstand vom Ursprung + Phasenverschiebung ) / ( Abstand vom Ursprung + 1 )
         y += wave.a * cos(wave.k * distanceToOrigin + phi) / (distanceToOrigin + 1);
