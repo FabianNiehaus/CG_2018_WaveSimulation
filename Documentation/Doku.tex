@@ -217,7 +217,7 @@ First, the mesh is draw as a wireframe using the method drawMeshWireFrame(). Thi
 \subsubsection{Rendering as an opaque surface}
 After drawing the object as a wireframe we want to draw it as an opaque surface with lighting. This is being achieved in the method drawMeshQuads() which connects all points into quads. This time using GL_Quads, the four vertices of a quad are connected and the area inbetween is filled. The normal vector for this is calculated using the cross product of the two diagonals vectors.
 
-\subsection{Wave Reflection}
+\subsection{Wave peflection}
 In this project, we also aimed to simulated reflection of the waves as if our mesh was a body of water located inside a rectangular container.
 
 \begin{center}
@@ -251,8 +251,8 @@ w8_Origin = (meshX - origX, -1 * mesh/ - origZ); // rechts unten
 \end{lstlisting}
 \captionof{figure}{Calculating OPs for reflection waves (pseudo code)}
 
-\subsection{Dynamic Parameters}
-In the last step, inputs for dynamic parameters were implemented. The following wave and program parameters can be set at runtime:
+\subsection{Dynamic parameters}
+In the last step, user inputs for dynamic parameters were implemented. The following wave and program parameters can be set at runtime:
 \begin{itemize}
 	\item Amplitude
 	\item Wavelength
@@ -276,6 +276,8 @@ if relfection is active
 	create the 8 corresponding reflection waves
 \end{lstlisting}
 \captionof{figure}{Updating the waves (pseudo code)}
+
+\subsection{Finished application}
 
 \section{Conclusion}
 We were able to create a simple wave simulator with wave reflection and user inputs. We gained deeper understandig of the mathematics involved in wave calculation and reflection.\\
